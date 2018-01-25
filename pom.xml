@@ -61,6 +61,8 @@
 		<!-- 第五章数据分页排序案例 -->
 		<module>chapter-5-spring-boot-paging-sorting</module>
 
+		<!--后续更新………-->
+		<module>springboot-solr</module>
 	</modules>
 
 </project>
