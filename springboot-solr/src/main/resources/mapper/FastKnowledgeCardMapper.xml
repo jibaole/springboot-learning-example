@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.spring.springboot.mapper.FastKnowledgeCardMapper">
+    <resultMap id="BaseResultMap" type="org.spring.springboot.bean.FastKnowledgeCard" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="column_id" property="columnId" jdbcType="INTEGER" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+        <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="praise_count" property="praiseCount" jdbcType="INTEGER" />
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+       <!-- <result column="original" property="original" jdbcType="BIT" />
+        <result column="status" property="status" jdbcType="BIT" />-->
+        <result column="pic" property="pic" jdbcType="LONGVARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
+    id, title, column_id, url,video_url, create_user,pic,content, update_user, create_time, update_time, praise_count,comment_count
+  </sql>
+
+    <!--根据counmId,获取知识列表-->
+    <select id="getList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select   <include refid="Base_Column_List" />
+        from t_app_fast_knowledge_card where status=1
+        <if test="counmId != null">
+         and   column_id = #{counmId}
+        </if>
+        ORDER BY update_time desc
+        limit #{fristPage}, 10
+    </select>
+
+    <!--点赞 +1 -->
+    <update id="doPraise" parameterType="java.lang.Integer" >
+        update   t_app_fast_knowledge_card set praise_count=praise_count+1 where 1=1
+        <if test="id != null and id != ''" >
+            and id=#{id}
+        </if>
+    </update>
+
+    <!--评论 +1 -->
+    <update id="doComment" parameterType="java.lang.Integer" >
+        update   t_app_fast_knowledge_card set comment_count=comment_count+1 where 1=1
+        <if test="id != null and id != ''" >
+            and id=#{id}
+        </if>
+    </update>
+</mapper>

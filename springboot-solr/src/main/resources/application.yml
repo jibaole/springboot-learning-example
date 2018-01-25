@@ -1,0 +1,28 @@
+﻿spring:
+  ## MySQL
+  datasource:
+    #url: jdbc:mysql://172.16.1.201:3306/apps?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    #username: wiki_write
+    #password: wiki_write
+    url: jdbc:mysql://127.0.0.1:3306/sboot?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  # Solr配置 #
+  data:
+     solr:
+       host: http://127.0.0.1:8080/solr/cores
+         #zk-host: node1:2181,node2:2181,node3:2181 #使用solrCloud zK配置
+       repositories:
+            enabled: true
+
+
+server:
+  port: 8081
+  address: 127.0.0.1
+  sessionTimeout: 30
+  tomcat:
+    uri-encoding: UTF-8
+
+oko :  properties ok !
+#spring.profiles.active=dev
